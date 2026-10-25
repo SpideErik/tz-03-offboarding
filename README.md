@@ -36,4 +36,4 @@ sudo bash audit-user.sh
 sudo bash ~/Downloads/offboarding-acceptance.sh | tee acceptance.txt
 ```
 
-Нейросеть использовалась для: оформления
+Нейросеть использовалась для: оформления таблиц, сотавления команд поиска, особенно нахождения не найденных по setuid и по владельцу
