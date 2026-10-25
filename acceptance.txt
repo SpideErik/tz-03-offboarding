@@ -1,0 +1,21 @@
+Account
+  OK    kozlov: password locked
+  OK    kozlov: account expired
+  OK    kozlov: no login shell
+  OK    kozlov: not in devops, finance, sudo
+  OK    kozlov: no sudo rules
+  OK    kozlov: no running processes
+  OK    kozlov: home directory kept
+Files
+  OK    /srv/devops belongs to orlova:devops
+  OK    orlova runs deploy.sh
+  OK    orlova reads prod_deploy_key
+  OK    deploy key closed for group and others
+  OK    lebedeva still works in /srv/finance
+  OK    no files of kozlov outside home and backup
+  OK    database dump removed from /srv/share
+  OK    backup: root only, notes, keys and dump inside
+  OK    home of kozlov has no notes and ssh keys
+System
+  OK    no setuid files added after the stand
+Result: 17 of 17

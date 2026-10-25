@@ -1,0 +1,68 @@
+
+== Учётная запись
+kozlov:x:1001:1003:Kozlov Dmitry, DevOps:/home/kozlov:/bin/bash
+kozlov P 2026-10-25 0 99999 7 -1
+-- срок действия (chage):
+Password expires					: never
+Account expires						: never
+-- оболочка: /bin/bash
+
+== Группы
+uid=1001(kozlov) gid=1003(kozlov) groups=1003(kozlov),27(sudo),1001(devops),1002(finance)
+
+== Права sudo
+-- упоминания kozlov в /etc/sudoers и /etc/sudoers.d:
+/etc/sudoers.d/90-kozlov:1:kozlov ALL=(ALL) NOPASSWD: ALL
+-- sudo -l -U:
+Matching Defaults entries for kozlov on debian:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
+
+User kozlov may run the following commands on debian:
+    (ALL : ALL) ALL
+    (ALL) NOPASSWD: ALL
+-- участник групп sudo/admin/wheel:
+kozlov входит в группу sudo
+
+== Процессы
+--- PID 3296
+   3296       1 Sun Oct 25 15:47:21 2026 /bin/bash /home/kozlov/.local/bin/sync-tunnel.sh
+cwd: /home/erik
+exe: /usr/bin/bash
+--- PID 3299
+   3299       1 Sun Oct 25 15:47:21 2026 python3 -m http.server 8000 --directory /home/kozlov
+cwd: /home/erik
+exe: /usr/bin/python3.13
+--- PID 3524
+   3524    3296 Sun Oct 25 16:24:01 2026 sleep 30
+cwd: /home/erik
+exe: /usr/bin/sleep
+--- слушающие порты процессов kozlov:
+LISTEN 0      5      0.0.0.0:8000 0.0.0.0:* users:(("python3",pid=3299,fd=3))
+
+== Файлы вне /home/kozlov
+   917515     28 -rw-r--r--   1 kozlov   kozlov      24774 Oct 25 15:47 /srv/share/db_dump_2026-09-28.sql
+   917506      4 drwxrws---   4 kozlov   devops       4096 Oct 25 15:47 /srv/devops
+   917507      4 drwxrws---   2 kozlov   devops       4096 Oct 25 15:47 /srv/devops/deploy
+   917511      4 -rwxr-x---   1 kozlov   devops        188 Oct 25 15:47 /srv/devops/deploy/deploy.sh
+   917512      4 -rw-r-----   1 kozlov   devops        107 Oct 25 15:47 /srv/devops/deploy/inventory.ini
+   917508      4 drwxrws---   2 kozlov   devops       4096 Oct 25 15:47 /srv/devops/keys
+   917513      4 -rw-------   1 kozlov   devops        141 Oct 25 15:47 /srv/devops/keys/prod_deploy_key
+-- другие разделы (без -xdev, исключая /proc /sys /dev /run):
+/srv/share/db_dump_2026-09-28.sql
+/srv/devops
+/srv/devops/deploy
+/srv/devops/deploy/deploy.sh
+/srv/devops/deploy/inventory.ini
+/srv/devops/keys
+/srv/devops/keys/prod_deploy_key
+-- файлы группы kozlov (если есть одноимённая группа), вне дома:
+-- в общих каталогах (/srv/share, /tmp, /var/tmp), включая скрытые:
+/srv/share/db_dump_2026-09-28.sql
+-- дампы и ключи в общих местах:
+/srv/share/db_dump_2026-09-28.sql
+/srv/devops/keys
+/srv/devops/keys/prod_deploy_key
+
+== Программы с setuid вне пакетов системы
+-- (setuid-файлы, принадлежащие kozlov, независимо от пакетов):
+-- (setgid вне пакетов не проверяется; при необходимости: find / -xdev -perm -2000 -type f)

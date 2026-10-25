@@ -77,7 +77,8 @@
 | 17:43 | Эрик | `dpkg -S /var/tmp/.cache-k/kbash` | `no path found` | 2.3.4 | Файл не принадлежит пакету |
 | 17:44 | Эрик | `sudo rm -rf /var/tmp/.cache-k` | Без ошибок | 2.3.4 | Удалить постороннюю копию bash |
 | 17:44 | Эрик | `sudo find / -xdev -perm -4000 -type f \| sort \| sudo comm -13 /root/.ops03-setuid.list -` | Пусто | 2.3.4 | Новых setuid-файлов нет |
-
+| 18:45 | Эрик | `sudo bash ~/Downloads/offboarding-acceptance.sh \| tee acceptance.txt` | Тесты пройдены | 4.2 | Проверка результата |
+| 18:46 | Эрик | `sudo bash audit-user.sh kozlov \| tee audit-before.txt` | Сняты сведения после изменений | 4.2 | Проверка результата |
 
 ## Что пошло не так и как исправили
 
@@ -88,3 +89,7 @@
 - Команды чтения закрытых каталогов и файлов выполняются только с `sudo`. Менять права ради чтения нельзя: паспорт снимает состояние «как было».
 - Поиск `find -perm -4000` с проверкой `dpkg -S` ничего не нашёл. Причина: оставленная копия оболочки `/var/tmp/.cache-k/kbash` не имеет бита setuid (он сбрасывается при смене владельца на root), а владелец root, поэтому поиск по `-user kozlov` её тоже не находит. Нашёл её поиском новых исполняемых файлов после запуска стенда (14:03).
 - Я ожидал, что sudo su - kozlov ответит This account is currently not available, а ответ был account has expired. Срок действия проверяется раньше оболочки, поэтому замок nologin виден через getent passwd, а не через su.
+
+## Финальная проверка на чистой VM
+
+![](screenshots/04-final-test.png)

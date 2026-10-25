@@ -1,0 +1,33 @@
+
+== Учётная запись
+kozlov:x:1001:1003:Kozlov Dmitry, DevOps:/home/kozlov:/usr/sbin/nologin
+kozlov L 2026-10-25 0 99999 7 -1
+-- срок действия (chage):
+Password expires					: never
+Account expires						: Jan 02, 1970
+-- оболочка: /usr/sbin/nologin
+
+== Группы
+uid=1001(kozlov) gid=1003(kozlov) groups=1003(kozlov)
+
+== Права sudo
+-- упоминания kozlov в /etc/sudoers и /etc/sudoers.d:
+(нет)
+-- sudo -l -U:
+User kozlov is not allowed to run sudo on debian.
+-- участник групп sudo/admin/wheel:
+
+== Процессы
+(процессов нет)
+
+== Файлы вне /home/kozlov
+-- другие разделы (без -xdev, исключая /proc /sys /dev /run):
+-- файлы группы kozlov (если есть одноимённая группа), вне дома:
+-- в общих каталогах (/srv/share, /tmp, /var/tmp), включая скрытые:
+-- дампы и ключи в общих местах:
+/srv/devops/keys
+/srv/devops/keys/prod_deploy_key
+
+== Программы с setuid вне пакетов системы
+-- (setuid-файлы, принадлежащие kozlov, независимо от пакетов):
+-- (setgid вне пакетов не проверяется; при необходимости: find / -xdev -perm -2000 -type f)
