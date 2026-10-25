@@ -32,6 +32,7 @@
 | 13:58 | Эрик | `sudo find / -xdev -perm -4000 -type f 2>/dev/null \| while read f; do dpkg -S "$f" >/dev/null 2>&1 \|\| echo "НЕ ИЗ ПАКЕТА: $f"; done` | вывод пустой: у всех файлов с setuid есть пакет | 2.3.4 | найти программы с setuid не из пакетов системы |
 | 14:00 | Эрик | `sudo find / -xdev -perm -4000 -type f 2>/dev/null` | 10 файлов: `dbus-daemon-launch-helper`, `ssh-keysign`, `passwd`, `chsh`, `gpasswd`, `newgrp`, `umount`, `chfn`, `sudo`, `su`, `mount`; все системные | 2.3.4 | проверить, что поиск работает и пустой результат не ошибка |
 | 14:03 | Эрик | `sudo find / -xdev -type f -perm /111 -newermt "2026-10-25 13:40" -not -path "/home/*" -not -path "/srv/*" -not -path "/var/lib/*" -not -path "/var/log/*" -ls 2>/dev/null` | найден `/var/tmp/.cache-k/kbash`, владелец root, `-rwxr-xr-x`, 1298416 байт, без бита setuid | 2.3.4 | найти оставленные программы, которых не нашёл поиск по setuid и по владельцу |
+| 16:24 | Эрик | `sudo bash audit-user.sh kozlov \| tee audit-before.txt` | Сняты сведения до изменений: группы devops, finance, sudo; правило sudo NOPASSWD; 2 процесса (один слушает порт 8000); файлы вне дома в /srv и /srv/share; setuid-файл вне пакетов в /var/tmp/.cache-k | 2.1.2, 2.1.3, 2.3.1, 2.3.4 | Собрать сведения до блокировки: после неё часть данных не получить; вывод сохранён в audit-before.txt для акта |
 
 ## Что пошло не так и как исправили
 
